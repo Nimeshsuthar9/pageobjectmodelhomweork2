@@ -1,10 +1,7 @@
 package org.example;
 
 import org.apache.commons.io.FileUtils;
-import org.openqa.selenium.By;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -62,7 +59,7 @@ public class Utils extends BasePage
         // Copy File Destination
         try
         {
-            FileUtils.copyFile(SrcFile, new File("src/ScreenShot"+text+randomDate()+".png"));
+            FileUtils.copyFile(SrcFile, new File("src/ScreenShot/"+text+randomDate()+".png"));
         }
         catch (IOException e)
         {
@@ -74,4 +71,72 @@ public class Utils extends BasePage
     {
         driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
     }
+    //method to use Explicit Wait
+    public static void elementToBeClickable(By by)
+    {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        WebElement element = wait.until(
+                ExpectedConditions.elementToBeClickable(by));
+    }
+    //method to use Explicit Wait
+    public static void visibilityOfElement(By by)
+    {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(by));
+    }
+    //method to use Explicit wait
+    public static void invisibilityOfElement(By by)
+    {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(by));
+    }
+    //method to use Explicit wait
+    public static void visibilityOfAllElementsLocated(By by)
+    {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(by));
+    }
+    //method to use Explicit wait
+    public static void alertPresent(int time)
+    {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(time));
+        WebDriver element = (WebDriver) wait.until(
+                ExpectedConditions.alertIsPresent());
+    }
+    //method to use Explicit wait
+    public static void frameToBeAvailableAndSwitch(By by)
+    {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        WebDriver element = wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(by));
+    }
+    //method to use Explicit Wait
+    public static void elementToBeSelect(By by)
+    {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        wait.until(ExpectedConditions.elementToBeSelected(by));
+    }
+    //method to use Explicit Wait
+    public static void elementToBePresent(By by)
+    {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        wait.until(ExpectedConditions.presenceOfElementLocated(by));
+    }
+    //method to use Explicit wait
+    public static void elementToBeSelected(By by)
+    {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        wait.until(ExpectedConditions.elementToBeSelected(by));
+    }
+    //sleep method
+    public static void elementSleep(){
+        try
+        {
+            Thread.sleep(1000);
+        } catch (InterruptedException e)
+        {
+            throw new RuntimeException(e);
+        }
+    }
 }
+
+
